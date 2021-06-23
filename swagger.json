@@ -1,0 +1,83 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "CUHKJC-AIForFuture APIDoc",
+    "description": "CUHKJC-AIForFuture APIDoc",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "name": "https://cuhkjc-aiforfuture/supports"
+    },
+    "license": {
+      "name": "MIT"
+    }
+  },
+  "host": "api-ai.keep.edu.hk",
+  "basePath": "/",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/absa/predict_json": {
+      "post": {
+        "description": "Creates a new pet in the store.  Duplicates are allowed",
+        "operationId": "addPet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "pet",
+            "in": "body",
+            "description": "Pet to add to the store",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NewPet"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "pet response",
+            "schema": {
+              "$ref": "#/definitions/Pet"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Pet": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/NewPet"
+        },
+        {
+          "required": [
+            "id"
+          ],
+          "properties": {
+            "id": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        }
+      ]
+    }
+  }
+}
